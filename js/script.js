@@ -2,7 +2,10 @@ window.onload = function() {
 
 	// Video
 	var video = document.getElementById("video");
-
+	var captions = document.getElementById("captions");
+	var lines = document.getElementById("subtitles").getElementsByTagName("span");
+	var now = video.currentTime;
+	
 	// Buttons
 	var playButton = document.getElementById("play-pause");
 	var muteButton = document.getElementById("mute");
@@ -12,7 +15,8 @@ window.onload = function() {
 	var seekBar = document.getElementById("seek-bar");
 	var volumeBar = document.getElementById("volume-bar");
 	var pBar = document.getElementById("p");
-
+	var pBarTwo = document.getElementById("p2");
+	var videoControls = document.getElementById("videoControls");
 
 
 	// Event listener for the play/pause button
@@ -31,19 +35,6 @@ window.onload = function() {
 			playButton.src = "icons/play-icon.png";
 		}
 	});
-
-
-// Event listener for the play/pause button
-	playButton.addEventListener("click", function() {
-		if (video.paused == true) {
-			// Hide the progress bar
-			document.getElementById("p").style.display = "none";
-		} else {
-			// Show the progress bar
-			document.getElementById("p").style.display = "block";
-		}
-	});
-
 
 
 	// Event listener for the mute button
@@ -85,6 +76,12 @@ window.onload = function() {
 		video.currentTime = time;
 	});
 
+
+		// Play the video when the seek handle is dropped
+//	seekBar.addEventListener("mouseup", function() {
+//		video.play();
+//	});
+
 	
 	// Update the seek bar as the video plays
 	video.addEventListener("timeupdate", function() {
@@ -112,11 +109,15 @@ window.onload = function() {
 		pBar.value = value;
 	});
 
+		// Update the progress bar as the video plays
+	video.addEventListener('timeupdate', function() {
+		// Calculate the progress value
+  		var value = (100 / video.duration) * video.currentTime;
 
-	// Play the video when the seek handle is dropped
-//	seekBar.addEventListener("mouseup", function() {
-//		video.play();
-//	});
+		// Update the progress value
+		pBarTwo.value = value;
+	});
+
 
 	// Update the duration and current play time
 	video.ontimeupdate = function() {myFunction()};
@@ -137,6 +138,24 @@ window.onload = function() {
 	}
 
 
+		// Update the time as the video plays
+	video.addEventListener('timeupdate', function() {
+		// highlight text as video plays
+		for (var i = 0; i < lines.length; i++) {
+		  if (now >= lines[i].getAttribute("start") &&
+		      now <= lines[i].getAttribute("end")) {
+		    lines[i].className = "current";
+		  } else {
+		    lines[i].className = "";
+		  }
+		}
+	});
+	
+
 
 }
+
+
+
+
 
