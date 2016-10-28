@@ -113,7 +113,7 @@ img:hover {
 }
 
 .current {
-   background-color: yellow;
+   background-color: orange;
 }
 
 progress[value] {

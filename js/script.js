@@ -101,7 +101,7 @@ window.onload = function() {
 
 
 	// Update the progress bar as the video plays
-	video.addEventListener('timeupdate', function() {
+	video.addEventListener("timeupdate", function() {
 		// Calculate the progress value
   		var value = (100 / video.duration) * video.currentTime;
 
@@ -110,7 +110,7 @@ window.onload = function() {
 	});
 
 		// Update the progress bar as the video plays
-	video.addEventListener('timeupdate', function() {
+	video.addEventListener("timeupdate", function() {
 		// Calculate the progress value
   		var value = (100 / video.duration) * video.currentTime;
 
@@ -120,7 +120,7 @@ window.onload = function() {
 
 
 	// Update the duration and current play time
-	video.ontimeupdate = function() {myFunction()};
+	video.ontimeupdate = function() {
 
 	function myFunction() {
 		var curmins = Math.floor(video.currentTime / 60);
@@ -136,14 +136,19 @@ window.onload = function() {
 	// Display the current position of the video in a <span> element with id="current"
 	    document.getElementById("duration").innerHTML = durmins+":"+dursecs;
 	}
+};
 
-
+		
 		// Update the time as the video plays
-	video.addEventListener('timeupdate', function() {
-		// highlight text as video plays
-		for (var i = 0; i < lines.length; i++) {
-		  if (now >= lines[i].getAttribute("start") &&
-		      now <= lines[i].getAttribute("end")) {
+	video.addEventListener("timeupdate", function() {
+		// loop through each span
+	for (var i = 0; i < lines.length; i++) {
+
+		var now = video.currentTime;
+		var start = lines[i].getAttribute("data-start");
+		var end = lines[i].getAttribute("data-end");	
+
+		  if (now >= start && now <= end) {
 		    lines[i].className = "current";
 		  } else {
 		    lines[i].className = "";
