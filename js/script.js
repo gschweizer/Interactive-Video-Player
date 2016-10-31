@@ -21,7 +21,7 @@ window.onload = function() {
 
 	// Event listener for the play/pause button
 	playButton.addEventListener("click", function() {
-		if (video.paused == true) {
+		if (video.paused === true) {
 			// Play the video
 			video.play();
 
@@ -39,7 +39,7 @@ window.onload = function() {
 
 	// Event listener for the mute button
 	muteButton.addEventListener("click", function() {
-		if (video.muted == false) {
+		if (video.muted === false) {
 			// Mute the video
 			video.muted = true;
 
@@ -107,14 +107,6 @@ window.onload = function() {
 
 		// Update the progress value
 		pBar.value = value;
-	});
-
-		// Update the progress bar as the video plays
-	video.addEventListener("timeupdate", function() {
-		// Calculate the progress value
-  		var value = (100 / video.duration) * video.currentTime;
-
-		// Update the progress value
 		pBarTwo.value = value;
 	});
 
@@ -122,7 +114,6 @@ window.onload = function() {
 	// Update the duration and current play time
 	video.ontimeupdate = function() {
 
-	function myFunction() {
 		var curmins = Math.floor(video.currentTime / 60);
 		var cursecs = Math.floor(video.currentTime - curmins * 60);
 		var durmins = Math.floor(video.duration / 60);
@@ -135,7 +126,6 @@ window.onload = function() {
 	    document.getElementById("current").innerHTML = curmins+":"+cursecs;
 	// Display the current position of the video in a <span> element with id="current"
 	    document.getElementById("duration").innerHTML = durmins+":"+dursecs;
-	}
 };
 
 		
@@ -158,7 +148,7 @@ window.onload = function() {
 	
 
 
-}
+};
 
 
 
